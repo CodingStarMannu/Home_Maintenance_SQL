@@ -31,9 +31,12 @@ const sequelize = new Sequelize('home_maintenance', 'root', 'M@54321', {
   db.userReferCode = require('./userReferCode')(sequelize,DataTypes)
   db.category = require('./category')(sequelize,DataTypes)
   db.sub_category = require('./sub_category')(sequelize,DataTypes)
+  db.company_detail = require('./company_detail')(sequelize,DataTypes)
 
 
-
+//added this to make relation
+  db.vendor_detail.hasMany( db.company_detail,{foreignKey:'vendor_id'})
+  db.company_detail.belongsTo(db.vendor_detail,{ foreignKey: 'vendor_id' })
 
 
   db.vendor_detail.hasMany( db.vendor_address,{foreignKey:'vendor_id'})
@@ -54,6 +57,6 @@ const sequelize = new Sequelize('home_maintenance', 'root', 'M@54321', {
 
 
 
-sequelize.sync({force:false})
+sequelize.sync({force:true})
 
 module.exports = db

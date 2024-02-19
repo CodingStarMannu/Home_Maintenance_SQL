@@ -63,10 +63,10 @@ var adminControllers = require("./controllers/adminController");
 var vendorController = require("./controllers/vendorController");
 
 //users
-app.post("/signupUsers", signUpValidation, userController.signupUsers);
-app.get("/verifyOTP/:id", signUpValidation, userController.verifyOTP);
-app.post("/savePassword/:id", signUpValidation, userController.savePassword);
-app.get("/loginUser", signUpValidation, userController.loginUser);
+app.post("/sendOTP", signUpValidation, userController.sendOTP);
+app.post("/signUpUser/:id", signUpValidation, userController.userSignUp);
+app.patch("/loginUser", signUpValidation, userController.loginUser);
+
 app.get("/forgetPassResendEmail", userController.forgetPassResendEmail);
 app.post("/addUserDetails", isAuthorize, userController.addUserDetails);
 app.patch("/userLogout", isAuthorize, userController.userLogout);
@@ -112,10 +112,11 @@ app.post(
 
 //vendor
 
-app.post("/signupvendor", signUpValidation, vendorController.signupvendor);
-app.get("/verifyOTP/:id", signUpValidation, vendorController.verifyOTP);
-app.post("/savePassword/:id", signUpValidation, vendorController.savePassword);
-app.get("/loginvendor", signUpValidation, vendorController.loginvendor);
+app.post("/sendOTPVendor", signUpValidation, vendorController.sendOTPVendor);
+app.post("/vendorSignUp/:id", signUpValidation, vendorController.vendorSignUp);
+app.patch("/logInVendor", signUpValidation, vendorController.logInVendor);
+
+
 app.get(
   "/forgetPassResendEmailvendor",
   vendorController.forgetPassResendEmailvendor
@@ -129,6 +130,14 @@ app.put(
   isAuthorize,
   vendorController.updatevendorDetails
 );
+
+
+// new added 
+app.post("/companyDetail",isAuthorize, vendorController.addCompanyDetails);
+app.get('/userVisits', isAuthorize,vendorController.getUserVisits);
+
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

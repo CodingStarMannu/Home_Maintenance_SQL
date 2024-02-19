@@ -2,11 +2,15 @@ module.exports = (sequelize, DataTypes) => {
   const company_detail = sequelize.define(
     "company_detail",
     {
-      vendor_id: {
+      company_detail_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+      },
+      vendor_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       companyName: {
         type: DataTypes.STRING,

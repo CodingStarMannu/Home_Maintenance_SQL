@@ -45,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: true,
         },
+        otpGeneratedAt:{
+          type: DataTypes.DATE,
+          allowNull: true,
+        }
       },
       {
         tableName: 'usersdata',
